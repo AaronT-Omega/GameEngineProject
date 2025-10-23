@@ -250,6 +250,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnDelay: 5
   repeatRate: 2
+  timer: 0
   randomPos: {x: 0, y: 0, z: 0}
   badguyPrefab: {fileID: 7080277613949991768, guid: b1de89231b1dc32448738a456968c4ee, type: 3}
 --- !u!4 &591435960
