@@ -28,8 +28,11 @@ public class BadGuy : Enemy
 
     public override void Attack()
     {
-        playerTarget = GameObject.FindGameObjectWithTag("Player").transform;
-        // Searches for the player with the Player tag
+        if (!playerTarget)
+        {
+            playerTarget = GameObject.FindGameObjectWithTag("Player").transform;
+            // Searches for the player with the Player tag
+        }
         
     }
 
@@ -50,3 +53,4 @@ public class BadGuy : Enemy
         }
     }
 }
+

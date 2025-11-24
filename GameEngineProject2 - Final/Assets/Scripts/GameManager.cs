@@ -7,7 +7,7 @@ public class GameManager : Singleton<GameManager>
 {
     public EnemySpawner badSpawner; //Sets up Enemy Spawning
   
-    public int currentScore = 0; 
+    public int currentScore = 0;
     public int currentHP = 3;
     private float timeTrack = 0f;
     // Sets up score, HP and time
@@ -91,7 +91,7 @@ public class GameManager : Singleton<GameManager>
     {
  
             Time.timeScale = 0f;
-            Debug.Log("Game Over");
+            //Debug.Log("Game Over");
             gameOverText.gameObject.SetActive(true);
             player.gameObject.SetActive(false);
 
