@@ -12,7 +12,7 @@ public class PlayerStopState : MonoBehaviour, IPlayerStates
         {
             _controller = controller;
         }
-
+        Debug.Log("Player Stopped");
         
 
 

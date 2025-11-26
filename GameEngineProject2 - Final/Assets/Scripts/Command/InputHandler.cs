@@ -19,6 +19,7 @@ public class InputHandler : MonoBehaviour
         _buttonD = new MoveRight(_playerMove);
         _buttonW = new MoveUp(_playerMove);
         _buttonS = new MoveDown(_playerMove);
+
         _noButtonH = new StopMoveH(_playerMove);
         _noButtonV = new StopMoveV(_playerMove);
 
@@ -30,7 +31,7 @@ public class InputHandler : MonoBehaviour
             
             if (Input.GetKeyDown(KeyCode.A))
                 _invoker.ExecuteCommand(_buttonA);
-            else if(Input.GetKeyUp(KeyCode.A) && !Input.anyKeyDown)
+            else if(Input.GetKeyUp(KeyCode.A))
                 _invoker.ExecuteCommand(_noButtonH);
 
             if (Input.GetKeyDown(KeyCode.D))

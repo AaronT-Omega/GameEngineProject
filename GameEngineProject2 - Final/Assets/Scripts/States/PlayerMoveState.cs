@@ -13,26 +13,10 @@ public class PlayerMoveState : MonoBehaviour, IPlayerStates
             _controller = controller;
         }
 
-        //Debug.Log("Moving");
+        Debug.Log("Moving");
 
-    }
+    }   
 
-    void Update()
-    {
-        if (_controller)
-        {
-            Vector3 movement = new Vector3(_controller.horizontalInput, _controller.verticalInput, 0);
-            // Calculate movement direction
-
-            if (movement.magnitude > 1f) // Normalize movement vector to prevent faster diagonal movement
-            {
-                movement.Normalize();
-            }
-
-
-            _controller.transform.Translate(movement * _controller.speed * Time.deltaTime, Space.World);
-        }
-
-    }
+    
 }
 

@@ -10,22 +10,24 @@ public class PlayerMovement : Subject
 {
     public enum Direction
     {
-        Left = -1,
-        Right = 1,
-        Up = 2,
-        Down = -2,
+        Left = 1,
+        Right = 2,
+        Up = 3,
+        Down = 4,
     }
     public float speed;
+    public float currentSpeed;
 
     public float horizontalInput;
     public float verticalInput;
 
 
-    private IPlayerStates _startState, _stopState, _moveState;
+    private IPlayerStates _stopState, _moveState;
 
     private PlayerStateContext _playerStateContext;
 
-    private Rigidbody2D rb2d;
+
+    [SerializeField] private Rigidbody2D rb2d;
     private BoxCollider2D bc;
 
 
@@ -36,7 +38,7 @@ public class PlayerMovement : Subject
 
         _playerStateContext = new PlayerStateContext(this);
 
-        //_startState = gameObject.AddComponent<PlayerStartState>();
+        
         _moveState = gameObject.AddComponent<PlayerMoveState>();
         _stopState = gameObject.AddComponent<PlayerStopState>();
         
@@ -44,8 +46,10 @@ public class PlayerMovement : Subject
         _playerStateContext.Transition(_stopState);
     }
 
-    void Update()
+    void FixedUpdate()
     {
+
+
         /*
         //horizontalInput = Input.GetAxis("Horizontal");
         //verticalInput = Input.GetAxis("Vertical");
@@ -53,6 +57,8 @@ public class PlayerMovement : Subject
         // Gets the vertical and horizontal inputs
 
         //Debug.Log(horizontalInput + " " + verticalInput);
+
+        */
         Vector3 movement = new Vector3(horizontalInput, verticalInput, 0);
         // Calculate movement direction
         
@@ -61,12 +67,22 @@ public class PlayerMovement : Subject
             movement.Normalize();
         }
 
-        
-        transform.Translate(movement * speed * Time.deltaTime, Space.World);
+        rb2d.velocity = movement * speed;
         // Apply movement to the object's transform
         // Time.deltaTime ensures consistent speed across different frame rates
         // Makes sure that movement is on a global scale due to how the player is able to rotate
-        */
+
+        if (rb2d.velocity.magnitude > 0)
+        {
+            _playerStateContext.Transition(_moveState);
+        }
+        else
+        {
+            _playerStateContext.Transition(_stopState);
+
+        }
+
+
     }
     public void Move(Direction direction)
     {
@@ -83,11 +99,6 @@ public class PlayerMovement : Subject
         if (direction == Direction.Down)
             verticalInput = -1;
 
-        _playerStateContext.Transition(_moveState);
-
-
-
-
     }
     public void StopMove(Direction direction)
     {
@@ -97,7 +108,8 @@ public class PlayerMovement : Subject
 
         if (direction == Direction.Up || direction == Direction.Down)
             verticalInput = 0;
-        _playerStateContext.Transition(_stopState);
+
+      
     }
 }
 

@@ -22,8 +22,11 @@ public class PlayerStateContext : MonoBehaviour
     }
     public void Transition(IPlayerStates state)
     {
-        CurrentState = state;
-        CurrentState.Handle(_controller);
+        if (state != CurrentState)
+        {
+            CurrentState = state;
+            CurrentState.Handle(_controller);
+        }
     }
 
 }

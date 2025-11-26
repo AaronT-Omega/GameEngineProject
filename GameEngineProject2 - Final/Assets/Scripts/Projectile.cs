@@ -7,22 +7,23 @@ public class Projectile : MonoBehaviour
     
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private float launchForce;
-    [SerializeField] private float destroyTime;
+    [SerializeField] private float disableTime;
 
-
-
-    private void Start()
+    private void OnEnable()
     {
+        StartCoroutine(DisableGameObjectWithDelay(disableTime));
         rb.velocity = transform.up * launchForce;
-        // Fires the projectile when created
+        // Fires the projectile when enabled
     }
 
-    // Update is called once per frame
-    void Update()
+    IEnumerator DisableGameObjectWithDelay(float delay)
     {
-        Destroy(gameObject, destroyTime);
-        // After a set amount of time, the projectile disappears
+        yield return new WaitForSeconds(disableTime);
+        gameObject.SetActive(false);
     }
+
+  
+    
 
     
 }
