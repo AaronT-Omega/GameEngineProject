@@ -6,8 +6,12 @@ public class BadGuy : Enemy
 {
 
     private BoxCollider2D contact;
+    public int badGuyHealth = 3;
 
-
+    private void OnEnable()
+    {
+        enemyHealth = badGuyHealth;
+    }
     private void Update()
     {
         if (playerTarget != null)
@@ -36,21 +40,6 @@ public class BadGuy : Enemy
         
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Player")) // When they touch the player, subtracts 1 HP from the Game Manager and destroys itself
-        {
-            GameManager.Instance.currentHP -= 1;
-            Destroy(gameObject);
-
-        }
-
-        if (collision.gameObject.CompareTag("Bullet")) // When they touch a bullet, increases score by 1 from the Game Manager and destroys itself
-        {
-            GameManager.Instance.currentScore += 1;
-            Destroy(gameObject);
-
-        }
-    }
+    
 }
 

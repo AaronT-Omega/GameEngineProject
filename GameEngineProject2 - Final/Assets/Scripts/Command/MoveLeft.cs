@@ -5,14 +5,14 @@ using UnityEngine;
 public class MoveLeft : Command
 {
     // Start is called before the first frame update
-    private PlayerMovement _controller;
-    public MoveLeft(PlayerMovement controller)
+    private PlayerController _controller;
+    public MoveLeft(PlayerController controller)
     {
         _controller = controller;
     }
     public override void Execute()
     {
-        _controller.Move(PlayerMovement.Direction.Left);
+        _controller.Move(PlayerController.Direction.Left);
     }
 
     void Update()

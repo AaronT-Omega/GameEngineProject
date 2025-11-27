@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class PlayerStopState : MonoBehaviour, IPlayerStates
 {
-    private PlayerMovement _controller;
+    private PlayerController _controller;
 
-    public void Handle(PlayerMovement controller)
+    public void Handle(PlayerController controller)
     {
         if (!_controller)
         {

@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class MoveRight : Command
 {
-    private PlayerMovement _controller;
-    public MoveRight(PlayerMovement controller)
+    private PlayerController _controller;
+    public MoveRight(PlayerController controller)
     {
         _controller = controller;
     }
     public override void Execute()
     {
-        _controller.Move(PlayerMovement.Direction.Right);
+        _controller.Move(PlayerController.Direction.Right);
     }
 }

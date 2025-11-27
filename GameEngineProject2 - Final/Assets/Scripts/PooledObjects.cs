@@ -11,6 +11,8 @@ public class PooledObjects : MonoBehaviour
     int _totalSpawn = 0;
     int _totalPooled = 0;
 
+    public Transform parentObject;
+
     List<GameObject> _pool = new List<GameObject>();
 
 
@@ -23,7 +25,7 @@ public class PooledObjects : MonoBehaviour
 
     private GameObject SpawnObjectFromPool (GameObject objPrefab, List<GameObject> pool, Vector3 location, Quaternion rotation)
     {
-        Debug.Log($"Total Spawn: {_totalSpawn} $Total Pooled: {_totalPooled}");
+        //Debug.Log($"Total Spawn: {_totalSpawn} $Total Pooled: {_totalPooled}");
 
         for (int i = 0; i < pool.Count; i++)
         {
@@ -38,7 +40,7 @@ public class PooledObjects : MonoBehaviour
             
 
         }
-        GameObject obj = Instantiate(objPrefab, location, rotation);
+        GameObject obj = Instantiate(objPrefab, location, rotation, parentObject);
         pool.Add(obj);
         _totalSpawn++;
         return obj;

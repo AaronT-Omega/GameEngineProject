@@ -5,10 +5,15 @@ using UnityEngine;
 public class Warning : MonoBehaviour
 {
     // Start is called before the first frame update
-    void Start()
+    void OnEnable()
     {
-        Destroy(gameObject, 2.0f);
+        Invoke("TurnOff", 2);
+        
     }
 
+    void TurnOff()
+    {
+        gameObject.SetActive(false);
+    }
    
 }

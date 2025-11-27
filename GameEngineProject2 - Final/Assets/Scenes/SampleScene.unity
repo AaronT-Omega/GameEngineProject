@@ -256,10 +256,13 @@ MonoBehaviour:
   spawnDelay: 5
   repeatRate: 2
   warningDelay: 2
+  parentObject: {fileID: 591435960}
+  _enemyPrefab: {fileID: 7080277613949991768, guid: b1de89231b1dc32448738a456968c4ee, type: 3}
+  _warningPrefab: {fileID: 6891681183442694674, guid: c1f7c203495624a439992d218bea63d6, type: 3}
+  _enemyPool: []
+  _warningPool: []
   timer: 0
   randomPos: {x: 0, y: 0, z: 0}
-  badguyPrefab: {fileID: 7080277613949991768, guid: b1de89231b1dc32448738a456968c4ee, type: 3}
-  badguyWarning: {fileID: 6891681183442694674, guid: c1f7c203495624a439992d218bea63d6, type: 3}
 --- !u!4 &591435960
 Transform:
   m_ObjectHideFlags: 0
@@ -330,26 +333,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &723830098 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 763519942252246097, guid: e235b3602681bad4687d1e54e1f7a98e, type: 3}
-  m_PrefabInstance: {fileID: 3846349819868404531}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &723830101
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 723830098}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5a428ce8b8c899840925a054716717a2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  projectilePrefab: {fileID: 5402045434819500072, guid: 987a7f2db62b4c74daee99e0791d1c23, type: 3}
-  firePoint: {fileID: 2002932241}
-  _pooledObjects: {fileID: 855357967}
 --- !u!1 &855357966
 GameObject:
   m_ObjectHideFlags: 0
@@ -380,6 +363,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _prefabObject: {fileID: 5402045434819500072, guid: 987a7f2db62b4c74daee99e0791d1c23, type: 3}
+  parentObject: {fileID: 855357968}
 --- !u!4 &855357968
 Transform:
   m_ObjectHideFlags: 0
@@ -1217,14 +1201,23 @@ PrefabInstance:
       propertyPath: rb2d
       value: 
       objectReference: {fileID: 475889698}
+    - target: {fileID: 8938704308392602870, guid: e235b3602681bad4687d1e54e1f7a98e, type: 3}
+      propertyPath: firePoint
+      value: 
+      objectReference: {fileID: 2002932241}
+    - target: {fileID: 8938704308392602870, guid: e235b3602681bad4687d1e54e1f7a98e, type: 3}
+      propertyPath: _pooledObjects
+      value: 
+      objectReference: {fileID: 855357967}
+    - target: {fileID: 8938704308392602870, guid: e235b3602681bad4687d1e54e1f7a98e, type: 3}
+      propertyPath: projectilePrefab
+      value: 
+      objectReference: {fileID: 5402045434819500072, guid: 987a7f2db62b4c74daee99e0791d1c23, type: 3}
     m_RemovedComponents:
     - {fileID: 0}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 763519942252246097, guid: e235b3602681bad4687d1e54e1f7a98e, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 723830101}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e235b3602681bad4687d1e54e1f7a98e, type: 3}
 --- !u!1001 &7330306690659002772
 PrefabInstance:
@@ -1237,6 +1230,18 @@ PrefabInstance:
     - target: {fileID: 890401653280318986, guid: eecd9c66fa769d44c8558c9a4f766d18, type: 3}
       propertyPath: m_Name
       value: Arena
+      objectReference: {fileID: 0}
+    - target: {fileID: 890401653280318986, guid: eecd9c66fa769d44c8558c9a4f766d18, type: 3}
+      propertyPath: m_TagString
+      value: Wall
+      objectReference: {fileID: 0}
+    - target: {fileID: 3028590884978180828, guid: eecd9c66fa769d44c8558c9a4f766d18, type: 3}
+      propertyPath: m_TagString
+      value: Wall
+      objectReference: {fileID: 0}
+    - target: {fileID: 3294600275251115829, guid: eecd9c66fa769d44c8558c9a4f766d18, type: 3}
+      propertyPath: m_TagString
+      value: Wall
       objectReference: {fileID: 0}
     - target: {fileID: 4460110435567913582, guid: eecd9c66fa769d44c8558c9a4f766d18, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1277,6 +1282,14 @@ PrefabInstance:
     - target: {fileID: 4460110435567913582, guid: eecd9c66fa769d44c8558c9a4f766d18, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6431856168113008316, guid: eecd9c66fa769d44c8558c9a4f766d18, type: 3}
+      propertyPath: m_TagString
+      value: Wall
+      objectReference: {fileID: 0}
+    - target: {fileID: 8358668320008819270, guid: eecd9c66fa769d44c8558c9a4f766d18, type: 3}
+      propertyPath: m_TagString
+      value: Wall
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

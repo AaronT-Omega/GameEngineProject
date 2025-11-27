@@ -5,8 +5,9 @@ using Unity.VisualScripting;
 using UnityEditor.Timeline.Actions;
 using UnityEngine;
 using UnityEngine.Playables;
+using UnityEngine.Pool;
 
-public class PlayerMovement : Subject
+public class PlayerController : Subject
 {
     public enum Direction
     {
@@ -21,8 +22,12 @@ public class PlayerMovement : Subject
     public float horizontalInput;
     public float verticalInput;
 
+    public GameObject projectilePrefab; // Assign your projectile prefab in the Inspector
+    public Transform firePoint;         // Assign an empty GameObject as the fire point
+    [SerializeField] PooledObjects _pooledObjects;
 
-    private IPlayerStates _stopState, _moveState;
+
+    private IPlayerStates _stopState, _moveState, _hitState, _attackState;
 
     private PlayerStateContext _playerStateContext;
 
@@ -41,15 +46,17 @@ public class PlayerMovement : Subject
         
         _moveState = gameObject.AddComponent<PlayerMoveState>();
         _stopState = gameObject.AddComponent<PlayerStopState>();
-        
+        _hitState = gameObject.AddComponent<PlayerHitState>();
+        _attackState = gameObject.AddComponent<PlayerAttackState>();
+
 
         _playerStateContext.Transition(_stopState);
     }
-
+   
     void FixedUpdate()
     {
 
-
+        
         /*
         //horizontalInput = Input.GetAxis("Horizontal");
         //verticalInput = Input.GetAxis("Vertical");
@@ -82,6 +89,31 @@ public class PlayerMovement : Subject
 
         }
 
+
+        
+
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Enemy")) // When they touch the player, subtracts 1 HP from the Game Manager and destroys itself
+        {
+            GameManager.Instance.currentHP -= 1;
+            _playerStateContext.Transition(_hitState);
+
+        }
+    }
+
+    public void Attack()
+    {
+        _playerStateContext.Transition(_attackState);
+        FireProjectile();
+    
+    }
+    public void FireProjectile()
+    {
+        //Instantiate(projectilePrefab,firePoint.position, transform.rotation);
+        _pooledObjects.GetProjectile(firePoint.position, transform.rotation);
 
     }
     public void Move(Direction direction)

@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class MoveUp : Command
 {
-    private PlayerMovement _controller;
-    public MoveUp(PlayerMovement controller)
+    private PlayerController _controller;
+    public MoveUp(PlayerController controller)
     {
         _controller = controller;
     }
     public override void Execute()
     {
-        _controller.Move(PlayerMovement.Direction.Up);
+        _controller.Move(PlayerController.Direction.Up);
     }
 
 }

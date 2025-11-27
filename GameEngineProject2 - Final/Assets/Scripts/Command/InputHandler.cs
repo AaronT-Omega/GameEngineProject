@@ -7,21 +7,23 @@ public class InputHandler : MonoBehaviour
     private Invoker _invoker;
     private bool _isReplaying;
     private bool _isRecording;
-    private PlayerMovement _playerMove;
-    private Command _buttonA, _buttonD, _buttonW, _buttonS, _noButtonH, _noButtonV;
+    private PlayerController _playerController;
+    private Command _buttonA, _buttonD, _buttonW, _buttonS, _noButtonH, _noButtonV, _buttonAttack;
     //private bool _isMoving = false;
     void Start()
     {
         _invoker = gameObject.AddComponent<Invoker>();
-        _playerMove = FindObjectOfType<PlayerMovement>();
+        _playerController = FindObjectOfType<PlayerController>();
 
-        _buttonA = new MoveLeft(_playerMove);
-        _buttonD = new MoveRight(_playerMove);
-        _buttonW = new MoveUp(_playerMove);
-        _buttonS = new MoveDown(_playerMove);
+        _buttonA = new MoveLeft(_playerController);
+        _buttonD = new MoveRight(_playerController);
+        _buttonW = new MoveUp(_playerController);
+        _buttonS = new MoveDown(_playerController);
 
-        _noButtonH = new StopMoveH(_playerMove);
-        _noButtonV = new StopMoveV(_playerMove);
+        _noButtonH = new StopMoveH(_playerController);
+        _noButtonV = new StopMoveV(_playerController);
+
+        _buttonAttack = new Attack(_playerController);
 
     }
     void Update()
@@ -48,6 +50,12 @@ public class InputHandler : MonoBehaviour
                 _invoker.ExecuteCommand(_buttonS);
             else if (Input.GetKeyUp(KeyCode.S))
                 _invoker.ExecuteCommand(_noButtonV);
+
+
+            if (Input.GetMouseButtonDown(0)) // Left mouse button click
+            {
+                _invoker.ExecuteCommand(_buttonAttack);
+            }
 
 
             //if (!Input.GetKeyDown(KeyCode.A) || !Input.GetKeyDown(KeyCode.D))

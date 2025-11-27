@@ -9,9 +9,9 @@ public class PlayerStateContext : MonoBehaviour
         get; set;
     }
 
-    private readonly PlayerMovement _controller;
+    private readonly PlayerController _controller;
 
-    public PlayerStateContext(PlayerMovement controller)
+    public PlayerStateContext(PlayerController controller)
     {
         _controller = controller;
     }

@@ -5,13 +5,13 @@ using UnityEngine;
 public class StopMoveV :     Command
 {
     // Start is called before the first frame update
-    private PlayerMovement _controller;
-    public StopMoveV(PlayerMovement controller)
+    private PlayerController _controller;
+    public StopMoveV(PlayerController controller)
     {
         _controller = controller;
     }
     public override void Execute()
     {
-        _controller.StopMove(PlayerMovement.Direction.Up);
+        _controller.StopMove(PlayerController.Direction.Up);
     }
 }

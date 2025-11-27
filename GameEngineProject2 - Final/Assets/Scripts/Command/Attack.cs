@@ -2,15 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MoveDown : Command
+public class Attack : Command
 {
     private PlayerController _controller;
-    public MoveDown(PlayerController controller)
+    public Attack(PlayerController controller)
     {
         _controller = controller;
     }
     public override void Execute()
     {
-        _controller.Move(PlayerController.Direction.Down);
+        _controller.Attack();
     }
+
 }
