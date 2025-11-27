@@ -883,6 +883,7 @@ GameObject:
   - component: {fileID: 1930379002}
   - component: {fileID: 1930379001}
   - component: {fileID: 1930379000}
+  - component: {fileID: 1930379003}
   m_Layer: 5
   m_Name: Game Over
   m_TagString: Untagged
@@ -1006,6 +1007,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1930379003
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1930378999}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bdb30a75c1f71e44aab766af45613486, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1936990259
 GameObject:
   m_ObjectHideFlags: 0
@@ -1187,6 +1200,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfe67799e6d4b4646b0ced8ca3dab112, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _keyBinds: {fileID: 0}
 --- !u!4 &2026912288
 Transform:
   m_ObjectHideFlags: 0

@@ -28,7 +28,13 @@ public class GameManager : Singleton<GameManager>
     bool isHit;
     // gets access to the Player object to disable later
 
-
+    private void Start()
+    {
+        if (_uiManager.gameOverText)
+        {
+            _uiManager.gameOverText.gameObject.SetActive(false);
+        }
+    }
     private void Update()
     {
         
