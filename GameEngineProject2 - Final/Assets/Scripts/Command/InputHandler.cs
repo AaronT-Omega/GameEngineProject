@@ -55,6 +55,7 @@ public class InputHandler : MonoBehaviour
             if (Input.GetMouseButtonDown(0)) // Left mouse button click
             {
                 _invoker.ExecuteCommand(_buttonAttack);
+                
             }
 
 

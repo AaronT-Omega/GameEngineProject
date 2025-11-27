@@ -145,3 +145,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerTarget: {fileID: 0}
   speed: 7
+  enemyHealth: 0
+  _enemyStateContext: {fileID: 0}
+  badGuyHealth: 3

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Singleton<T> : MonoBehaviour where T : Component
+public class Singleton<T> : Observer where T : Component
 {
     private static T _instance;
     public static T Instance
@@ -35,6 +35,16 @@ public class Singleton<T> : MonoBehaviour where T : Component
             Destroy(gameObject);
         }
     }
+
+    public override void Notify(Subject subject, IPlayerStates state) // Overides the Notify function
+    {
+
+    }
+
+    
+        
+    
+
 }
 
 

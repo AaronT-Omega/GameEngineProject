@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Observer : MonoBehaviour
+public interface IObserver
 {
     public abstract void Notify(Subject subject, IPlayerStates state);
 }

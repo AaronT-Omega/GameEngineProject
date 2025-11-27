@@ -2,16 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerStateContext : MonoBehaviour
+public class EnemyStateContext : MonoBehaviour
 {
-    public IPlayerStates CurrentState // Get Set
+    public IEnemyStates CurrentState // Get Set
     {
         get; set;
     }
 
-    private readonly PlayerController _controller;
+    private readonly Enemy _controller;
 
-    public PlayerStateContext(PlayerController controller)
+    public EnemyStateContext(Enemy controller)
     {
         _controller = controller;
     }
@@ -21,7 +21,7 @@ public class PlayerStateContext : MonoBehaviour
         CurrentState.Handle(_controller);
 
     }
-    public void Transition(IPlayerStates state)
+    public void Transition(IEnemyStates state)
     {
         if (state != CurrentState)
         {
@@ -29,5 +29,4 @@ public class PlayerStateContext : MonoBehaviour
             CurrentState.Handle(_controller);
         }
     }
-
 }

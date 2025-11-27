@@ -16,6 +16,8 @@ public class PlayerController : Subject
         Up = 3,
         Down = 4,
     }
+
+    
     public float speed;
     public float currentSpeed;
 
@@ -27,19 +29,29 @@ public class PlayerController : Subject
     [SerializeField] PooledObjects _pooledObjects;
 
 
-    private IPlayerStates _stopState, _moveState, _hitState, _attackState;
+    private GameManager _gameManager;
+    private UI_Manager _uiManager;
+    private SoundManager _soundManager;
 
-    private PlayerStateContext _playerStateContext;
+
+    public IPlayerStates _stopState, _moveState, _hitState, _attackState;
+
+    public PlayerStateContext _playerStateContext;
 
 
     [SerializeField] private Rigidbody2D rb2d;
     private BoxCollider2D bc;
 
 
-    void Start()
+    void Awake()
     {
         rb2d = GetComponent<Rigidbody2D>();
         bc = GetComponent<BoxCollider2D>();
+
+
+        _gameManager = (GameManager)FindObjectOfType(typeof(GameManager));
+        _uiManager = (UI_Manager)FindObjectOfType(typeof(UI_Manager));
+        _soundManager = (SoundManager)FindObjectOfType(typeof(SoundManager));
 
         _playerStateContext = new PlayerStateContext(this);
 
@@ -49,10 +61,33 @@ public class PlayerController : Subject
         _hitState = gameObject.AddComponent<PlayerHitState>();
         _attackState = gameObject.AddComponent<PlayerAttackState>();
 
+        
 
-        _playerStateContext.Transition(_stopState);
+
+        ChangeState(_stopState);
     }
-   
+
+
+    void OnEnable() // Attaches observers when enabled
+    {
+        if (_gameManager)
+            Attach(_gameManager);
+        if (_uiManager)
+            Attach(_uiManager);
+        if (_soundManager)
+            Attach(_soundManager);
+    }
+    void OnDisable() // Detaches observers when disabled
+    {
+        if (_gameManager)
+            Detach(_gameManager);
+        if (_uiManager)
+            Detach(_uiManager);
+        if (_soundManager)
+            Detach(_soundManager);
+    }
+
+
     void FixedUpdate()
     {
 
@@ -81,38 +116,40 @@ public class PlayerController : Subject
 
         if (rb2d.velocity.magnitude > 0)
         {
-            _playerStateContext.Transition(_moveState);
+            ChangeState(_moveState);
         }
         else
         {
-            _playerStateContext.Transition(_stopState);
+            ChangeState(_stopState);
 
         }
+    }
 
 
-        
-
+    private void ChangeState(IPlayerStates state)
+    {
+        _playerStateContext.Transition(state);
+        //Debug.Log(state.ToString());
+        NotifyObservers(this, state);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Enemy")) // When they touch the player, subtracts 1 HP from the Game Manager and destroys itself
         {
-            GameManager.Instance.currentHP -= 1;
-            _playerStateContext.Transition(_hitState);
+            ChangeState(_hitState);
 
         }
     }
 
     public void Attack()
     {
-        _playerStateContext.Transition(_attackState);
-        FireProjectile();
+        ChangeState(_attackState);
+      
     
     }
     public void FireProjectile()
     {
-        //Instantiate(projectilePrefab,firePoint.position, transform.rotation);
         _pooledObjects.GetProjectile(firePoint.position, transform.rotation);
 
     }

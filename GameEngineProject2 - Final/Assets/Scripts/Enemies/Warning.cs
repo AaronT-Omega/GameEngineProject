@@ -7,7 +7,7 @@ public class Warning : MonoBehaviour
     // Start is called before the first frame update
     void OnEnable()
     {
-        Invoke("TurnOff", 2);
+        //Invoke("TurnOff", 2);
         
     }
 

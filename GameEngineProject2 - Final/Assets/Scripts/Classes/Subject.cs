@@ -17,11 +17,11 @@ public abstract class Subject : MonoBehaviour
         _observers.Remove(observer);
     }
 
-    protected void NotifyObservers()
+    protected void NotifyObservers(Subject subject, IPlayerStates state)
     {
         foreach (Observer observer in _observers)
         {
-            observer.Notify(this);
+            observer.Notify(this, state);
         }
     }
 }

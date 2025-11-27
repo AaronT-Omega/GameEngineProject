@@ -29,8 +29,9 @@ public class BadGuySpawner : EnemySpawner
             if (timer < repeatRate)
             {
                 timer = spawnDelay;
-                SpawnEnemy(spawnPos);
                 warningFlag = true;
+                SpawnEnemy(spawnPos);
+                
                 
                 // As the timer decreases, if it's lower then the Repeat Rate which will increment over time, then it will spawn and reset itself
                 // back to the spawn delay duration
@@ -40,6 +41,19 @@ public class BadGuySpawner : EnemySpawner
     }
     public override Enemy SpawnEnemy(Vector3 position) //Spawns the enemy based on the attached prefab
     {
+        if (warningFlag)
+        {
+            for (int i = 0; i < _warningPool.Count; i++)
+            {
+                if (_warningPool[i].activeInHierarchy == true)
+                {
+                    _warningPool[i].SetActive(false);
+                }
+            }
+        }
+
+
+
         GameObject createBadguy = SpawnObjectFromPool(_enemyPrefab, _enemyPool, position, Quaternion.identity);
         return createBadguy.GetComponent<Enemy>();
     }

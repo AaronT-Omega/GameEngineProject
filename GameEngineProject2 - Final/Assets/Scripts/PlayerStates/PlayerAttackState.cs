@@ -13,7 +13,8 @@ public class PlayerAttackState : MonoBehaviour, IPlayerStates
             _controller = controller;
         }
         Debug.Log("Player Attacks");
-
+        _controller.FireProjectile();
+        SoundManager.PlaySound(SoundType.PlayerAttack);
 
 
     }
